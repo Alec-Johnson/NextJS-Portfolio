@@ -2,8 +2,13 @@ import * as React from 'react';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { wrap } from 'popmotion';
-import { images } from './image-data';
 import Image from 'next/image';
+
+const images = [
+  '/ProjectImage1.png',
+  '/ProjectImage2.png',
+  '/ProjectImage3.png',
+];
 
 const variants = {
   enter: (direction: number) => {
@@ -45,7 +50,6 @@ const Accordion = () => {
       <AnimatePresence initial={false} custom={direction}>
         <motion.div
           key={page}
-          
           custom={direction}
           variants={variants}
           animate='center'
