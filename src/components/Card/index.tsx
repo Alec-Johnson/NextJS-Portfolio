@@ -55,7 +55,7 @@ const Card = (project: Project) => {
                 width={354}
                 height={200}
               /> */}
-              <Accordion />
+              <Accordion {...project} />
             </div>
 
             <div className='absolute inset-0 flex flex-col-reverse items-start justify-start h-full p-6 pb-6 md:hidden '>

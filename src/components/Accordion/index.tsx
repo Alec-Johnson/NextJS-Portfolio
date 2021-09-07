@@ -4,12 +4,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { wrap } from 'popmotion';
 import Image from 'next/image';
 
-const images = [
-  '/ProjectImage1.png',
-  '/ProjectImage2.png',
-  '/ProjectImage3.png',
-];
-
 const variants = {
   enter: (direction: number) => {
     return {
@@ -36,10 +30,8 @@ const swipePower = (offset: number, velocity: number) => {
   return Math.abs(offset) * velocity;
 };
 
-const Accordion = () => {
+const Accordion = ({ img, alt }: { alt: string; img: string }) => {
   const [[page, direction], setPage] = useState([0, 0]);
-
-  const imageIndex = wrap(0, images.length, page);
 
   const paginate = (newDirection: number) => {
     setPage([page + newDirection, newDirection]);
@@ -68,10 +60,10 @@ const Accordion = () => {
           }}
         >
           <Image
-            alt='Project Image'
+            alt={alt}
             width={354}
             height={200}
-            src={images[imageIndex]}
+            src={img}
             className='absolute object-fill rounded-lg md:rounded-br-lg md:rounded-tr-lg md:rounded-bl-none'
           />
         </motion.div>
