@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .span-card {
+    @apply inline-block px-2 py-1 mx-1 text-xs text-white transition-all duration-150 transform bg-gray-600 bg-opacity-75 rounded hover:shadow-sm hover:scale-105;
+  }
+  .btn-card {
+    @apply px-2 py-1 mx-1 text-sm font-semibold text-white transform bg-gray-900 rounded cursor-pointer hover:bg-gray-700 hover:scale-90 focus:outline-none;
+  }
+  .nav-btn {
+    @apply flex items-center h-full font-semibold uppercase border-blue-500 cursor-pointer hover:border-b-4 dark:border-blue-300 hover:text-blue-600 dark:hover:text-blue-400 dark:text-blue-300 hover:animate-pulse hover:overflow-hidden hover:-mb-1;
+  }
+  .frosted {
+    @apply bg-opacity-5;
+  }
+  .input-group {
+    @apply h-1/2 flex w-full flex-col mt-2.5 mr-0;
+  }
+  .form-text {
+    @apply font-bold tracking-wide text-gray-800 uppercase dark:text-gray-400;
+  }
+  .input {
+    *:focus {
+      outline: none !important;
+    }
+  }
+  .next,
+  .prev {
+    top: calc(50% - 20px);
+    position: absolute;
+    background: white;
+    border-radius: 30px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+    z-index: 2;
+  }
+
+  .next {
+    right: 10px;
+  }
+
+  .prev {
+    left: 10px;
+    transform: scale(-1);
+  }
+}
