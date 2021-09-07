@@ -1,7 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import nodemailer from 'nodemailer';
 
-export default function contact(req: NextApiRequest, res: NextApiResponse) {
+export default async function contact(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   require('dotenv').config();
 
   const transporter: nodemailer.Transporter = nodemailer.createTransport({
@@ -14,6 +17,19 @@ export default function contact(req: NextApiRequest, res: NextApiResponse) {
     secure: true,
   });
 
+  await new Promise((resolve, reject) => {
+    // verify connection configuration
+    transporter.verify(function (error, success) {
+      if (error) {
+        console.log(error);
+        reject(error);
+      } else {
+        console.log('Server is ready to take our messages');
+        resolve(success);
+      }
+    });
+  });
+
   const mailData: nodemailer.SendMailOptions = {
     from: `${req.body.email}`,
     to: 'alecjohnsondev@gmail.com',
@@ -22,13 +38,18 @@ export default function contact(req: NextApiRequest, res: NextApiResponse) {
     html: `<div>${req.body.message}</div><p>Sent from: ${req.body.email}</p>`,
   };
 
-  transporter.sendMail(
-    mailData,
-    function (err, info: nodemailer.SentMessageInfo): void {
-      if (err) console.log(err);
-      else console.log(info);
-    }
-  );
+  await new Promise((resolve, reject) => {
+    // send mail
+    transporter.sendMail(mailData, (err, info) => {
+      if (err) {
+        console.error(err);
+        reject(err);
+      } else {
+        console.log(info);
+        resolve(info);
+      }
+    });
+  });
 
   res.statusCode = 200;
   res.setHeader('Content-Type', 'application/json');
